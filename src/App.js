@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Header from "./components/header/header";
+import Main from "./components/main/main";
+import Footer from "./components/footer/footer";
+import data from "./mock-data.json";
 
 function App() {
+  localStorage.clear();
+  let usedData = localStorage.getItem("hello")
+    ? JSON.parse(localStorage.getItem("hello"))
+    : data;
+  const [dataList, setDataList] = useState(usedData);
+  localStorage.setItem("hello", JSON.stringify(dataList));
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Main dataList={dataList} setDataList={setDataList} />
+      <Footer
+        taskCount={[dataList.inprogress.taskCount, dataList.finished.taskCount]}
+      />
+    </>
   );
 }
-
 export default App;

@@ -1,0 +1,25 @@
+.button {
+  padding: 4px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: 0;
+  border-radius: 5px;
+}
+.button.active {
+  color: #5e6c84;
+  cursor: pointer;
+  padding: 10px;
+}
+button[name="Submit"] {
+  padding-right: 22px;
+  padding-left: 22px;
+}
+button[name="Submit"].active:hover {
+  background-color: #0079bf;
+  color: #fff;
+}
+.button.disabled {
+  color: red;
+}

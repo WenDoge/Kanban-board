@@ -1,0 +1,19 @@
+.main-content {
+  background: #0079bf;
+  height: calc(100vh - 110px);
+}
+.main-container {
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 100%;
+}
+.error {
+  height: calc(100vh - 110px);
+  font-size: 150px;
+  color: #fff;
+}
+@media screen and (max-width: 1300px) {
+  .main-content {
+    height: auto;
+  }
+}

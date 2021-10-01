@@ -1,0 +1,67 @@
+import React, { useState, useEffect, useRef } from "react";
+import "./dropDown.css";
+
+const DropDown = (props) => {
+  const [handleToggle, setHandleToggle] = useState({ open: false });
+  const { open } = handleToggle;
+  const containerRef = useRef(null);
+  const handleButtonClick = () => {
+    setHandleToggle({ open: !open });
+  };
+
+  const handleClickOutside = (event) => {
+    if (containerRef.current && !containerRef.current.contains(event.target)) {
+      setHandleToggle({
+        open: false,
+      });
+      return;
+    }
+  };
+  const dropDownItemClick = (e) => {
+    const { innerText } = e.target;
+    setHandleToggle({ open: false });
+    props.setBtn(innerText);
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+
+  return (
+    <div className={`dropdown ${props.className}`}>
+      <div className="container dropdown-container" ref={containerRef}>
+        <button
+          type="button"
+          className="button dropdown-button"
+          onClick={handleButtonClick}
+        >
+          <div>{props.btnValue(open)}</div>
+          <div
+            className={`dropdown-button__item${open ? " dropdown__open" : ""}`}
+          ></div>
+        </button>
+        {open && (
+          <div className="dropdown__item">
+            <ul>
+              {props.data.map((str) => {
+                return (
+                  <li
+                    className="dropdown__item-text"
+                    key={str.id}
+                    onClick={dropDownItemClick}
+                  >
+                    {str.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+DropDown.defaultProps = { className: "" };
+export default DropDown;

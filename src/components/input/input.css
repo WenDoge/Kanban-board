@@ -1,0 +1,14 @@
+.input {
+  font-size: 18px;
+  width: -webkit-fill-available;
+  border: none;
+  padding-right: 0px;
+  color: #000;
+  outline: none;
+}
+
+@media screen and (max-width: 1300px) {
+  .task label::after {
+    width: 380px;
+  }
+}
