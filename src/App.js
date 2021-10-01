@@ -6,7 +6,7 @@ import Footer from "./components/footer/footer";
 import data from "./mock-data.json";
 
 function App() {
-  localStorage.clear();
+  // localStorage.clear();
   let usedData = localStorage.getItem("hello")
     ? JSON.parse(localStorage.getItem("hello"))
     : data;

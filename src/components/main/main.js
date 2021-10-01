@@ -64,7 +64,7 @@ const Main = (props) => {
         path={`/${value}`}
         render={(props) => (
           <TaskWindow
-            readOnly={someVal.title === "backlog || ready" ? false : true}
+            readOnly={someVal.title === "backlog" || "ready" ? false : true}
             title={someVal.issues[reValue].name}
             text={someVal.issues[reValue].text}
             onClick={() => {
