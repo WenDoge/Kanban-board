@@ -54,7 +54,7 @@ const Task = (props) => {
           ...data.issues,
           { id: `${data.title}${data.count}`, name: value, text: "" },
         ],
-        taskCount: data.taskCount + 1,
+        // taskCount: data.taskCount + 1,
         count: count + 1,
       };
 
@@ -72,7 +72,7 @@ const Task = (props) => {
               text: dropData.issues[dataIndex].text,
             },
           ],
-          taskCount: data.taskCount + 1,
+          // taskCount: data.taskCount + 1,
           count: count + 1,
         };
         const newDropData = dropData.issues.filter(
@@ -84,7 +84,7 @@ const Task = (props) => {
           [dropData.title]: {
             ...dropData,
             issues: newDropData,
-            taskCount: dropData.taskCount - 1,
+            // taskCount: dropData.taskCount - 1,
           },
           [data.title]: newData,
         });
@@ -134,6 +134,11 @@ const Task = (props) => {
       }
       setStates({ ...states, btnDisable: true });
       return;
+    } else if (dropData) {
+      if (!dropData.issues.length) {
+        setStates({ ...states, btnDisable: true });
+        return;
+      }
     }
     setStates({ ...states, btnDisable: false });
     return;

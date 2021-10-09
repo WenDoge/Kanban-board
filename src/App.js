@@ -17,7 +17,10 @@ function App() {
       <Header />
       <Main dataList={dataList} setDataList={setDataList} />
       <Footer
-        taskCount={[dataList.inprogress.taskCount, dataList.finished.taskCount]}
+        taskCount={[
+          dataList.backlog.issues.length,
+          dataList.finished.issues.length,
+        ]}
       />
     </>
   );

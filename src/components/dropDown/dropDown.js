@@ -2,24 +2,22 @@ import React, { useState, useEffect, useRef } from "react";
 import "./dropDown.css";
 
 const DropDown = (props) => {
-  const [handleToggle, setHandleToggle] = useState({ open: false });
-  const { open } = handleToggle;
+  const [handleToggle, setHandleToggle] = useState(false);
+  // const { open } = handleToggle;
   const containerRef = useRef(null);
   const handleButtonClick = () => {
-    setHandleToggle({ open: !open });
+    setHandleToggle(!handleToggle);
   };
 
   const handleClickOutside = (event) => {
     if (containerRef.current && !containerRef.current.contains(event.target)) {
-      setHandleToggle({
-        open: false,
-      });
+      setHandleToggle(false);
       return;
     }
   };
   const dropDownItemClick = (e) => {
     const { innerText } = e.target;
-    setHandleToggle({ open: false });
+    setHandleToggle(false);
     props.setBtn(innerText);
   };
   useEffect(() => {
@@ -37,12 +35,14 @@ const DropDown = (props) => {
           className="button dropdown-button"
           onClick={handleButtonClick}
         >
-          <div>{props.btnValue(open)}</div>
+          <div>{props.btnValue(handleToggle)}</div>
           <div
-            className={`dropdown-button__item${open ? " dropdown__open" : ""}`}
+            className={`dropdown-button__item${
+              handleToggle ? " dropdown__open" : ""
+            }`}
           ></div>
         </button>
-        {open && (
+        {handleToggle && (
           <div className="dropdown__item">
             <ul>
               {props.data.map((str) => {
@@ -57,6 +57,7 @@ const DropDown = (props) => {
                 );
               })}
             </ul>
+            {props.children}
           </div>
         )}
       </div>

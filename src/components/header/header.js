@@ -2,6 +2,7 @@ import "./header.css";
 import userImage from "./user-avatar.svg";
 import DropDown from "../dropDown/dropDown";
 import rectangle from "./rectangle.svg";
+
 const Header = () => {
   const data = [
     { id: "header0", name: "Profile" },
@@ -13,22 +14,21 @@ const Header = () => {
         <div className="title">
           <h1>Awesome Kanban Board</h1>
         </div>
-        <div className="user">
-          <DropDown
-            setBtn={(value) => console.log(value)}
-            btnValue={(open) => {
-              return (
-                <>
-                  <img className="header-img" src={userImage}></img>
-                  {open ? (
-                    <img className="header-rectangle" src={rectangle} />
-                  ) : null}
-                </>
-              );
-            }}
-            data={data}
-          />
-        </div>
+        <DropDown
+          setBtn={(value) => console.log(value)}
+          btnValue={() => {
+            return (
+              <img
+                className="header-img"
+                src={userImage}
+                alt="header-img"
+              ></img>
+            );
+          }}
+          data={data}
+        >
+          <img className="header-rectangle" src={rectangle} alt="rectangle" />
+        </DropDown>
       </div>
     </header>
   );

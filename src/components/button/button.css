@@ -10,7 +10,6 @@
 .button.active {
   color: #5e6c84;
   cursor: pointer;
-  padding: 10px;
 }
 button[name="Submit"] {
   padding-right: 22px;

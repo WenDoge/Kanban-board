@@ -48,34 +48,36 @@ const Main = (props) => {
     </>
   );
   const createWindowedTasks = allIDs.map((value) => {
-    const re = /[0-9]+/;
-    const reValue = re.exec(value);
-
-    const someVal = /^b/.test(value)
+    const valueSection = /^b/.test(value)
       ? backlog
       : /^r/.test(value)
       ? ready
       : /^i/.test(value)
       ? inprogress
       : finished;
+    const valueIndex = valueSection.issues.findIndex((obj) => obj.id === value);
+
     return (
       <Route
         key={value}
         path={`/${value}`}
         render={(props) => (
           <TaskWindow
-            readOnly={someVal.title === "backlog" || "ready" ? false : true}
-            title={someVal.issues[reValue].name}
-            text={someVal.issues[reValue].text}
+            readOnly={
+              valueSection.title === "backlog" || "ready" ? false : true
+            }
+            title={valueSection.issues[valueIndex].name}
+            text={valueSection.issues[valueIndex].text}
             onClick={() => {
               props.history.push("/");
             }}
             onChange={
-              someVal.title === "backlog" || "ready"
+              valueSection.title === "backlog" || "ready"
                 ? (e) => {
                     setDataList((prevState) => {
                       const list = { ...prevState };
-                      list[someVal.title].issues[reValue].text = e.target.value;
+                      list[valueSection.title].issues[valueIndex].text =
+                        e.target.value;
                       return list;
                     });
                     return;
