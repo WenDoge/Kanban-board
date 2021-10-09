@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/header/header";
 import Main from "./components/main/main";
@@ -11,7 +11,10 @@ function App() {
     ? JSON.parse(localStorage.getItem("hello"))
     : data;
   const [dataList, setDataList] = useState(usedData);
-  localStorage.setItem("hello", JSON.stringify(dataList));
+  useEffect(
+    () => localStorage.setItem("hello", JSON.stringify(dataList)),
+    [dataList]
+  );
   return (
     <>
       <Header />
