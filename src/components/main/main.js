@@ -63,16 +63,14 @@ const Main = (props) => {
         path={`/${value}`}
         render={(props) => (
           <TaskWindow
-            readOnly={
-              valueSection.title === "backlog" || "ready" ? false : true
-            }
+            readOnly={valueSection.title === "backlog" ? false : true}
             title={valueSection.issues[valueIndex].name}
             text={valueSection.issues[valueIndex].text}
             onClick={() => {
               props.history.push("/");
             }}
             onChange={
-              valueSection.title === "backlog" || "ready"
+              valueSection.title === "backlog"
                 ? (e) => {
                     setDataList((prevState) => {
                       const list = { ...prevState };

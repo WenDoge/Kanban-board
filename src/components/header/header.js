@@ -1,7 +1,6 @@
 import "./header.css";
 import userImage from "./user-avatar.svg";
 import DropDown from "../dropDown/dropDown";
-import rectangle from "./rectangle.svg";
 
 const Header = () => {
   const data = [
@@ -26,9 +25,7 @@ const Header = () => {
             );
           }}
           data={data}
-        >
-          <img className="header-rectangle" src={rectangle} alt="rectangle" />
-        </DropDown>
+        />
       </div>
     </header>
   );

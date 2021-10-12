@@ -46,6 +46,14 @@
   border-radius: 50%;
 }
 
+.header li.dropdown__item-text:first-child::after {
+  content: "";
+  position: absolute;
+  left: 55px;
+  bottom: 60px;
+  border: 9px solid transparent;
+  border-bottom: 8px solid #fff;
+}
 @media screen and (max-width: 1300px) {
   .header {
     background-color: #0079bf;
