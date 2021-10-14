@@ -7,14 +7,7 @@ import TaskWindow from "../taskWindow/taskWindow";
 const Main = (props) => {
   const { setDataList, dataList } = props;
   const { backlog, ready, inprogress, finished } = dataList;
-  const cardIDs = (str) => {
-    return str.issues.map((value) => value.id);
-  };
-  const backlogIDs = cardIDs(backlog);
-  const readyIDs = cardIDs(ready);
-  const inprogressIDs = cardIDs(inprogress);
-  const finishedIDs = cardIDs(finished);
-  const allIDs = backlogIDs.concat(readyIDs, inprogressIDs, finishedIDs);
+
   const tasks = (
     <>
       <Task
@@ -47,46 +40,6 @@ const Main = (props) => {
       />
     </>
   );
-  const createWindowedTasks = allIDs.map((value) => {
-    const valueSection = /^b/.test(value)
-      ? backlog
-      : /^r/.test(value)
-      ? ready
-      : /^i/.test(value)
-      ? inprogress
-      : finished;
-    const valueIndex = valueSection.issues.findIndex((obj) => obj.id === value);
-
-    return (
-      <Route
-        key={value}
-        path={`/${value}`}
-        render={(props) => (
-          <TaskWindow
-            readOnly={valueSection.title === "backlog" ? false : true}
-            title={valueSection.issues[valueIndex].name}
-            text={valueSection.issues[valueIndex].text}
-            onClick={() => {
-              props.history.push("/");
-            }}
-            onChange={
-              valueSection.title === "backlog"
-                ? (e) => {
-                    setDataList((prevState) => {
-                      const list = { ...prevState };
-                      list[valueSection.title].issues[valueIndex].text =
-                        e.target.value;
-                      return list;
-                    });
-                    return;
-                  }
-                : null
-            }
-          />
-        )}
-      />
-    );
-  });
 
   return (
     <main className="main-content">
@@ -94,11 +47,9 @@ const Main = (props) => {
         <Router>
           <Switch>
             <Route path="/" exact component={() => tasks} />
-            {createWindowedTasks}
-            <Route
-              path="*"
-              component={() => <div className="error">Error 404</div>}
-            />
+            <Route path={`/:taskID`}>
+              <TaskWindow {...props} />
+            </Route>
           </Switch>
         </Router>
       </div>
